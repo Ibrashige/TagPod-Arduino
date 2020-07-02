@@ -1,6 +1,8 @@
 int offset = 510;
 const float vpp = 0.0048828125;
 int points;
+float voltage;
+float amperage;
 #define VOUT  A0
 
 void setup() {
