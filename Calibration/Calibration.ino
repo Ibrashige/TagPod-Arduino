@@ -29,14 +29,14 @@ void setup() {
 }
 
 void loop() {
-  calculatevoltage();
-  calculateweight();
+  calculatevoltage();   // Function to calculate voltage output from both amplifiers
+  calculateweight();   // Function to convert voltage to weight
 }
 
 float calculatevoltage(){
   
   points = analogRead(VOUT)- offset; 
-  voltage = (points * vpp) ; 
+  voltage = (points * vpp) ;  
   Serial.print("calculated voltage is:");
   Serial.println(voltage);
 
@@ -46,7 +46,7 @@ float calculatevoltage(){
 void calculateweight(){
   numerator = totalLoad * (voltage);
   voutmax = s * a * ve;              // raw output voltage to its maximum rated capacity
-  load = numerator/voutmax - 4.18; // weight in kgs
+  load = numerator/voutmax - 4.18;   // weight in kgs
 
  if(load >= 0 || load <= 0.05 )
  {
