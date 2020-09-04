@@ -8,7 +8,7 @@
  */
  
 const float offset = 4.1056; // offset for the load cell to indicate 0 load at 2.5 V
-const float vpp = 0.0048828125; // 5V/1024 for ADC conversion
+const float vpp = 0.00122070312; // 5V/4096 for ADC conversion
 const float totalLoad = 22.68; // maximum load capacity 12.5 pounds
 const float a = 1100; // Amplifier Gain
 const float s = 0.0008998; // load cell sensitivity 
@@ -19,7 +19,7 @@ float load;
 float numerator; // numerator of load calculation
 float voutmax; // denominator of load calculation
 
-#define VOUT  A0
+#define VOUT  32
 
 void setup() {
   
@@ -29,14 +29,14 @@ void setup() {
 }
 
 void loop() {
-  calculatevoltage();   // Function to calculate voltage output from both amplifiers
-  calculateweight();   // Function to convert voltage to weight
+  calculatevoltage();
+  calculateweight();
 }
 
 float calculatevoltage(){
   
-  points = analogRead(VOUT)- offset; 
-  voltage = (points * vpp) ;  
+  points = analogRead(VOUT); 
+  voltage = (points * vpp) ; 
   Serial.print("calculated voltage is:");
   Serial.println(voltage);
 
@@ -46,9 +46,9 @@ float calculatevoltage(){
 void calculateweight(){
   numerator = totalLoad * (voltage);
   voutmax = s * a * ve;              // raw output voltage to its maximum rated capacity
-  load = numerator/voutmax - 4.18;   // weight in kgs
+  load = numerator/voutmax ; // weight in kgs
 
- if(load >= 0 || load <= 0.05 )
+ if(load >= 0 && load <= 0.05 )
  {
     load = 0;
  }
