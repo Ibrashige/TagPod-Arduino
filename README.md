@@ -1,2 +1,2 @@
 # TagPod 
-Hardware and firmware of Tag project
+Arduino code for Tag project
